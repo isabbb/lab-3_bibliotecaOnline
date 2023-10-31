@@ -38,17 +38,15 @@ public class Serializacion {
     }
     public static Lista leerArchivo(ServletContext context) throws IOException, ClassNotFoundException {
         Lista lLibros = new Lista();
-        // Ruta relativa y absoluta del archivo de datos serializados
         String rutaRelativa = "/data/librosAgregados.ser";
         String rutaAbsoluta = context.getRealPath(rutaRelativa);
         File archivo = new File(rutaAbsoluta);
 
         if (archivo.exists() && archivo.isFile()) {
             try (FileInputStream fis = new FileInputStream(archivo); ObjectInputStream ois = new ObjectInputStream(fis)) {
-                // Leer y deserializar la lista enlazada desde el archivo
+
                 lLibros = (Lista) ois.readObject();
             } catch (EOFException e) {
-                // EOFException indica que el archivo estaba vacío
                 System.out.println("El archivo está vacío");
             } catch (IOException e) {
                 System.out.println("Error al leer el archivo");
