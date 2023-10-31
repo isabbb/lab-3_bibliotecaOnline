@@ -12,14 +12,14 @@ public class Libro {
    private String Titulo;
    private String Autor;
    private String Portada;
-   private int Anio;
+   private String Anio;
     public Libro siguiente;
     public Libro anterior;
 
     public Libro() {
     }
 
-    public Libro(String Titulo, String Autor, String Portada, int Anio) {
+    public Libro(String Titulo, String Autor, String Portada, String Anio) {
         this.Titulo = Titulo;
         this.Autor = Autor;
         this.Portada = Portada;
@@ -40,7 +40,7 @@ public class Libro {
         return Portada;
     }
 
-    public int getAnio() {
+    public String getAnio() {
         return Anio;
     }
 
@@ -56,7 +56,7 @@ public class Libro {
         this.Portada = Portada;
     }
 
-    public void setAnio(int Anio) {
+    public void setAnio(String Anio) {
         this.Anio = Anio;
     }
     public Libro getSiguiente() {

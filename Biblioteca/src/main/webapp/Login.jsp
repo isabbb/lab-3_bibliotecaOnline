@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -16,6 +18,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="templates/style.css">
     </head>
+    
+
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -153,17 +157,17 @@
                         
                         
                         <!-- FORMULARIO-->
-                        <form class="row g-3">
+                        <form class="row g-3" method = "POST" action = "SvAgregarLibro"  enctype="multipart/form-data">>
                             <div class="col-md-4">
                                 <label for="validationServer01" class="form-label">Titulo del libro</label>
-                                <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required>
+                                <input type="text" class="form-control is-valid" id="validationServer01" name = "titulo"value="Mark" required>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationServer02" class="form-label">Autor</label>
-                                <input type="text" class="form-control is-valid" id="validationServer02" value="Otto" required>
+                                <input type="text" class="form-control is-valid" id="validationServer02"  name = "autor"value="Otto" required>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
@@ -179,15 +183,12 @@
      
                              <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Portada</span>
-                        <input type="file" class="form-control" name="foto"  placeholder="url foto" aria-label="Username" aria-describedby=aria-describedby="validationServer03Feedback" required="true" accept=".jpg, .jpeg">
+                     <input type="file" class="form-control" name="foto"  placeholder="url foto" aria-label="Username" aria-describedby="basic-addon1" required="true" accept=".jpg, .jpeg">
                    </div>
  
                             <div class="col-12">
                                 <div class="form-check">
-                                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
-                                    <label class="form-check-label" for="invalidCheck3">
-                                        Acepta las condiciones.
-                                    </label>
+                                   
                                     <div id="invalidCheck3Feedback" class="invalid-feedback">
                                        
                                     </div>

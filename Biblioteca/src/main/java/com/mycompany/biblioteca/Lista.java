@@ -18,5 +18,17 @@ public class Lista {
         iNodo = null;
         fNodo = null;
     }
+      
     
+    public void agregar (Libro libros){
+           if (iNodo == null){
+               iNodo = libros;
+               fNodo = libros;
+           }else {
+               libros.setSiguiente(iNodo);
+               iNodo.setAnterior(libros);
+               iNodo = libros;
+           }
+        
+    }
 }
