@@ -13,6 +13,8 @@ public class Libro {
    private String Autor;
    private String Portada;
    private int Anio;
+    public Libro siguiente;
+    public Libro anterior;
 
     public Libro() {
     }
@@ -22,6 +24,8 @@ public class Libro {
         this.Autor = Autor;
         this.Portada = Portada;
         this.Anio = Anio;
+        this.siguiente = null;
+        this.anterior = null;
     }
 
     public String getTitulo() {
@@ -55,6 +59,21 @@ public class Libro {
     public void setAnio(int Anio) {
         this.Anio = Anio;
     }
-   
-   
+    public Libro getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Libro siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public Libro getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(Libro anterior) {
+        this.anterior = anterior;
+    }
 }
+   
+
