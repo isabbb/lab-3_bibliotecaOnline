@@ -4,12 +4,14 @@
  */
 package com.mycompany.biblioteca;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author ADMIN
  */
-public class Nodo {
+public class Nodo implements Serializable {
     public Libro libro;
     Nodo siguiente, anterior;
     

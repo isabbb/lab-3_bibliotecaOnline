@@ -4,12 +4,14 @@
     */
     package com.mycompany.biblioteca;
 
+import java.io.Serializable;
+
 
     /**
     *
     * @author ***
     */
-    public class Lista {
+    public class Lista implements Serializable{
 
     private Nodo iNodo, fNodo;
 
@@ -24,17 +26,24 @@
        return iNodo !=null;
     }
 
-    public void agregar (Libro libros){
-           if (iNodo == null){
-               iNodo = new Nodo(libros);
-           }else {
-               iNodo = fNodo = new Nodo(libros);
-           }        
+    public void agregar(Libro libro) {
+    Nodo nuevoNodo = new Nodo(libro);
+    
+    if (iNodo == null) {
+        // If the list is empty, set both iNodo and fNodo to the new node
+        iNodo = fNodo = nuevoNodo;
+    } else {
+        // If the list is not empty, add the new node at the end and update fNodo
+        fNodo.siguiente = nuevoNodo;
+        fNodo = nuevoNodo;
     }
+}
+    
 
     public String generarTabla (){
         StringBuilder tablaHTML = new StringBuilder();
         Nodo actual = iNodo; 
+        
         if (actual != null) {
             //Se recorre la lista
             while (actual != null) {
@@ -52,7 +61,7 @@
         }
     }
 
- tablaHTML.append("</table>");  // Cierra la tabla
+            tablaHTML.append("</table>");  // Cierra la tabla
 
         return tablaHTML.toString();//Se manda la tabla creada
     }

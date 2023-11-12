@@ -108,15 +108,15 @@
                     <div>
                           <%
                             //Condicional if para saber si existen tareas en el archivo
-                            if (verificar) {
+                            if (!verificar) {
                         %>
                         <tr>
-                            <td colspan='6' align='center' valign='middle'>No se han registrado tareas</td>
+                            <td colspan='6' align='center' valign='middle'>No se han registrado Libro</td>
                         </tr>
                         <%
                             }
                         %>
-
+                            
                         <%= tablaHTML%>
                             
                             </div>
@@ -456,7 +456,7 @@
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+        <!-- Core theme JS-->   
         <script src="js/scripts.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
