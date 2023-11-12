@@ -5,6 +5,7 @@
 package com.mycompany.biblioteca;
 
 
+import static com.mycompany.biblioteca.Serializacion.leerArchivo;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -57,4 +59,19 @@ public class Serializacion {
 
         return lLibros;
     }
+    
+     public static String listarLibros (ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
+       //Llenamos la lista con la informacion del archivo
+       Lista listaLibro = leerArchivo(context);
+       //En caso de estar vacia se crea una
+        if (listaLibro == null) {
+             listaLibro = new Lista();
+        }
+       String tabla="";//Variable que contiene la tabla
+       
+       
+           tabla=listaLibro.generarTabla();
+       
+           return tabla;
+}
 }

@@ -1,6 +1,17 @@
+<%@page import="com.mycompany.biblioteca.Lista"%>
+<%@page import="com.mycompany.biblioteca.Serializacion"%>
 <!DOCTYPE html>
 
-
+<% 
+    Lista listaLIbro = new Lista();
+    
+     ServletContext context = getServletContext();
+     
+      listaLIbro = Serializacion.leerArchivo(context);
+      
+      boolean verificar = listaLIbro.verificar();
+      
+     String tablaHTML = Serializacion.listarLibros(context, request);%>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -94,15 +105,26 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>No dejes que</td>
-                            <td>Caifanes</td>
-                            <td>Editar Borrar</td>
+                    <div>
+                          <%
+                            //Condicional if para saber si existen tareas en el archivo
+                            if (verificar) {
+                        %>
+                        <tr>
+                            <td colspan='6' align='center' valign='middle'>No se han registrado tareas</td>
+                        </tr>
+                        <%
+                            }
+                        %>
+
+                        <%= tablaHTML%>
+                            
+                            </div>
                         </tr>
                     </tbody> 
                 </table>
                 </div>
-               </div>  
+               </div>   
             </div>    
         </div>
         </center>
@@ -157,7 +179,7 @@
                         
                         
                         <!-- FORMULARIO-->
-                        <form class="row g-3" method = "POST" action = "SvAgregarLibro"  enctype="multipart/form-data">>
+                        <form class="row g-3" method = "POST" action = "SvAgregarLibro"  enctype="multipart/form-data">
                             <div class="col-md-4">
                                 <label for="validationServer01" class="form-label">Titulo del libro</label>
                                 <input type="text" class="form-control is-valid" id="validationServer01" name = "titulo"value="Mark" required>
