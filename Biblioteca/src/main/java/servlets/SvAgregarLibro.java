@@ -7,7 +7,6 @@ package servlets;
 import com.mycompany.biblioteca.Libro;
 import java.io.IOException;
 import java.io.PrintWriter;
-import com.mycompany.biblioteca.Lista;
 import com.mycompany.biblioteca.Serializacion;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +23,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import com.mycompany.biblioteca.Lista;
+import static jdk.jpackage.internal.Arguments.CLIOptions.context;
 
 /**
  *
@@ -35,7 +36,7 @@ public class SvAgregarLibro extends HttpServlet {
     
     Lista listaLibros = new Lista();
 
- 
+     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -46,6 +47,43 @@ public class SvAgregarLibro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try {
+            listaLibros = Serializacion.leerArchivo(request.getServletContext());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SvAgregarLibro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        System.out.println("Título del libro recibido: " + request.getParameter("titulo"));
+        
+         String titulo = request.getParameter("titulo").trim();
+        try {
+            Libro libro = listaLibros.buscarLibro(titulo, request);
+            System.out.println(libro);
+            
+            if (libro != null) {
+            // Genera la respuesta HTML con los detalles del perro
+            String libroHtml = "<h2>Titulo: " + libro.getTitulo() + "</h2>" +
+                               "<p>Autor: " + libro.getAutor() + "</p>" +
+                               "<p>Año: " + libro.getAnio() + "</p>" +
+                               "<img src='imgLibros/" + libro.getPortada()+ "' alt='" + libro.getTitulo() + "' width='100%'/>";
+            response.setContentType("text/html");
+            response.getWriter().write(libroHtml);
+            
+             System.out.println("---------------------------------------###################--------------------");
+                System.out.println(libroHtml);
+                        
+             System.out.println("---------------------------------------###################-----------------");
+        } else {
+            // Maneja el caso en el que no se encuentra el perro
+            response.setContentType("text/plain");
+            response.getWriter().write("Libro no encontrado");
+            
+        }
+           
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SvAgregarLibro.class.getName()).log(Level.SEVERE, null, ex);
+        }
         processRequest(request, response);
     }
 

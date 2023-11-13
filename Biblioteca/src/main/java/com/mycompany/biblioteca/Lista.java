@@ -4,7 +4,13 @@
     */
     package com.mycompany.biblioteca;
 
+import static com.mycompany.biblioteca.Serializacion.leerArchivo;
+import java.io.IOException;
 import java.io.Serializable;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import static jdk.jpackage.internal.Arguments.CLIOptions.context;
+
 
 
     /**
@@ -53,6 +59,10 @@ import java.io.Serializable;
                 tablaHTML.append("<td>").append(libro.getAutor()).append("</td>");
                 tablaHTML.append("<td>").append(libro.getAnio()).append("</td>");
                 tablaHTML.append("<td>").append(libro.getPortada()).append("</td>");
+                
+                tablaHTML.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+                tablaHTML.append("<a href=\"#\" type=\"button\" class=\"btn btn-outline-success\" data-bs-toggle=\"modal\" data-bs-target=\"#editar\" data-nombre=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-pen-clip\"></i></a>");
+                tablaHTML.append("<a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#eliminar\" data-nombre=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-trash\"></i></a></td>");
 
 
 
@@ -65,4 +75,54 @@ import java.io.Serializable;
 
         return tablaHTML.toString();//Se manda la tabla creada
     }
-    }
+    public Libro buscarLibro (String titulo,HttpServletRequest request) throws IOException, ClassNotFoundException{
+
+                        Nodo actual = iNodo;
+                           
+                        System.out.println(titulo);
+                           
+
+                            while (actual !=null ){
+                            Libro libro = actual.libro;
+
+                            if (libro.getTitulo().equalsIgnoreCase(titulo)){
+                                
+                                return libro;
+                                
+                            }
+                             actual = actual.siguiente;
+                        }
+                        return null;
+
+                    }
+     public String tablaBusqueda (String terminoBusqueda, HttpServletRequest request){
+          StringBuilder tablaHTML = new StringBuilder();
+           Nodo actual = iNodo; 
+          
+           
+           
+           
+           while (actual !=null){
+         if (terminoBusqueda.equalsIgnoreCase(actual.libro.getAutor()) || terminoBusqueda.equalsIgnoreCase(actual.libro.getTitulo())){
+              
+              Libro libro = actual.libro;
+                 tablaHTML.append("<tr>");
+                tablaHTML.append("<td>").append(libro.getTitulo()).append("</td>");
+                tablaHTML.append("<td>").append(libro.getAutor()).append("</td>");
+                tablaHTML.append("<td>").append(libro.getAnio()).append("</td>");
+                tablaHTML.append("<td>").append(libro.getPortada()).append("</td>");
+                
+                tablaHTML.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+                tablaHTML.append("<a href=\"#\" type=\"button\" class=\"btn btn-outline-success\" data-bs-toggle=\"modal\" data-bs-target=\"#editar\" data-nombre=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-pen-clip\"></i></a>");
+                tablaHTML.append("<a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#eliminar\" data-nombre=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-trash\"></i></a></td>");
+
+          }
+          actual = actual.siguiente;
+     }
+           tablaHTML.append("</table>");  // Cierra la tabla
+
+        return tablaHTML.toString(); //Se devuelve la tabla
+           
+          
+     }
+        }

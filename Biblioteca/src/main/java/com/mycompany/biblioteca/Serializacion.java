@@ -52,7 +52,7 @@
             } catch (EOFException e) {
                 System.out.println("El archivo está vacío");
             } catch (IOException e) {
-                System.out.println("Error al leer el archivo");
+                System.out.println("Error al leer el archivo"); 
             }
         } else {
             System.out.println("El archivo no existe");
@@ -60,7 +60,7 @@
 
         return lLibros;
     }
-         public static String listarLibros (ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
+         public static String listarLibros (String terminoBusqueda,ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
            //Llenamos la lista con la informacion del archivo
            Lista listaLibro = leerArchivo(context);
            //En caso de estar vacia se crea una
@@ -69,9 +69,32 @@
             }
            String tabla="";//Variable que contiene la tabla
 
-
+           if (terminoBusqueda==null){
                tabla=listaLibro.generarTabla();
+           }else if (!terminoBusqueda.isEmpty() ){
+               tabla = listaLibro.tablaBusqueda(terminoBusqueda, request);
+           }
+               
 
                return tabla;
     }
+         
+//         public static Libro buscarLibro (String titulo, ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
+//              Lista bLibro = leerArchivo(context);
+//              
+//              Nodo actual = bLibro.agregar(libro);
+//              while ()
+//              
+//                 if (i.getTitulo().equals(titulo)){
+//                
+//                return i; // retorna le perro si se encuentra 
+//            }
+//        }
+//        return null; // retorna null si no se encuentra el perro
+//    }
     }
+
+             
+             
+         
+    
