@@ -1,0 +1,12 @@
+com\mycompany\biblioteca\Libro.class
+com\mycompany\biblioteca\MetodosU.class
+servlets\SvLogin.class
+com\mycompany\biblioteca\Nodo.class
+com\mycompany\biblioteca\Lista.class
+com\mycompany\biblioteca\Serializacion.class
+servlets\SvBuscar.class
+com\mycompany\biblioteca\JakartaRestConfiguration.class
+com\mycompany\biblioteca\resources\JakartaEE8Resource.class
+com\mycompany\biblioteca\Usuario.class
+servlets\SvUsuario.class
+servlets\SvAgregarLibro.class
