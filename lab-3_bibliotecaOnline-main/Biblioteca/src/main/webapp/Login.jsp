@@ -1,3 +1,4 @@
+<%@page import="com.mycompany.biblioteca.Libro"%>
 <%@page import="com.mycompany.biblioteca.Lista"%>
 <%@page import="com.mycompany.biblioteca.Serializacion"%>
 <!DOCTYPE html>
@@ -296,7 +297,33 @@
              </div> 
          </div> 
      </div>
+        
+        
+                <!-- Modal de confirmacion de la accion eliminar  -->
+   
+       
+       
+       
+       <div class="modal fade" id="eliminarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="eliminarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 align="center">¿Estás seguro de que deseas eliminar esta tarea?</h2>
+                <form action="SvEliminar" method="GET">
+                    <!-- Agregar un campo de entrada para mostrar el ID de la tarea -->
+                    <input type="text" id="inputEliminar" name="inputEliminar" hidden>
 
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="margin-right: 10px; background-color: #512da8">Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-danger" >Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
         
         <!-- Bootstrap core JS-->
@@ -332,11 +359,25 @@
     });
   });
   
-  
-  
-
-
 </script>
+<script>
+    
+    var id = "";
+    $('#eliminarModal').on('show.bs.modal', function (event) {
+        
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        
+        var tiEliminar = button.data('tituloEliminar'); // Obtén el valor de la variable desde el botón
+        
+           $('#inputEliminar').val(tiEliminar);
+        
+        var modal = $(this);
+        
+         id = tiEliminar;
+        
+    });
+</script>
+
 
     </body>
     

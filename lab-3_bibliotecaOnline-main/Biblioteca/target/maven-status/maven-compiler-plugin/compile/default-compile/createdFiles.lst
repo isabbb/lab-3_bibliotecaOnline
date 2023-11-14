@@ -3,6 +3,7 @@ com\mycompany\biblioteca\MetodosU.class
 servlets\SvLogin.class
 com\mycompany\biblioteca\Nodo.class
 com\mycompany\biblioteca\Lista.class
+servlets\SvEliminar.class
 com\mycompany\biblioteca\Serializacion.class
 servlets\SvBuscar.class
 com\mycompany\biblioteca\JakartaRestConfiguration.class

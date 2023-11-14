@@ -4,8 +4,13 @@
  */
 package servlets;
 
+import com.mycompany.biblioteca.Lista;
+import com.mycompany.biblioteca.Serializacion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,42 +21,49 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-@WebServlet(name = "SvBuscar", urlPatterns = {"/SvBuscar"})
-public class SvBuscar extends HttpServlet {
-
-
+@WebServlet(name = "SvEliminar", urlPatterns = {"/SvEliminar"})
+public class SvEliminar extends HttpServlet {
+    
+  Lista listaLibros = new Lista();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-
- 
-
-         
+        response.setContentType("text/html;charset=UTF-8");
+       
     }
 
-  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-               String terminoBusqueda = request.getParameter("tiauto"); //Se obtiene el usuario 
-        //Redirigimos con la variable para que cambie la tabla
-        System.out.println(terminoBusqueda);
-        response.sendRedirect("Login.jsp?search="+terminoBusqueda);
-        
+      
+      try {
+          listaLibros = Serializacion.leerArchivo(request.getServletContext());
+      } catch (ClassNotFoundException ex) {
+          Logger.getLogger(SvEliminar.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      
+      String titulo = request.getParameter("inputEliminar");
+      
+        System.out.println(titulo);
+      
+      listaLibros.eliminarLibro(titulo);
+      
+      Serializacion.escribirArchivo(listaLibros, request.getServletContext());
+          response.sendRedirect("Login.jsp");
+
     }
 
-   
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    
+   
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
