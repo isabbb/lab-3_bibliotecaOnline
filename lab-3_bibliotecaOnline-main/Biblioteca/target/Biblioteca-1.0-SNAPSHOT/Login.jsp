@@ -13,7 +13,11 @@
       
       boolean verificar = listaLibro.verificar();
       
+      String ident = "";
       
+       Lista libros = new Lista ();
+       libros=Serializacion.leerArchivo(context);
+
       
      String tablaHTML = Serializacion.listarLibros(terminoBusqueda, context, request); %>
 <html lang="en">
@@ -133,12 +137,69 @@
                </div>   
             </div>    
         </div>
-        </center>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    </body>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    </body>
-        </section>
+        
+        
+        <div class="container">
+            
+                <!-- Libros prestados-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Libros prestados</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+            </div>
+         <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-4">
+    
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>     
+        <center>
+    <table border="1">
+
+        <div class="container p-8"> <!-- clase contenedora -->
+            </div>  
+            <div class="col-md-8">
+                    <table class="table table-bordered">
+                    <thead>
+                        <tr>
+
+                            <th>Titulo</th>
+                            <th>Autor</th>
+                            <th>Año de publicacion</th>
+                            <th>Portada</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                    <div>
+                          <%
+                            //Condicional if para saber si existen tareas en el archivo
+                            if (!verificar) {
+                        %>
+                        <tr>
+                            <td colspan='6' align='center' valign='middle'>No se han registrado Libro</td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                            
+                        <%= tablaHTML%>
+                            
+                            </div>
+                        </tr>
+                    </tbody> 
+                </table>
+                </div>
+               </div>   
+            </div>    
+        </div>
+        
+       
+                        
                         
         <!-- About Section-->
         <section class="page-section bg-primary text-white mb-0" id="about"style="background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);">
@@ -194,14 +255,14 @@
                         <form class="row g-3" method = "POST" action = "SvAgregarLibro"  enctype="multipart/form-data">
                             <div class="col-md-4">
                                 <label for="validationServer01" class="form-label">Titulo del libro</label>
-                                <input type="text" class="form-control is-valid" id="validationServer01" name = "titulo"value="Mark" required>
+                                <input type="text" class="form-control" id="validationServer01" name = "titulo"required>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationServer02" class="form-label">Autor</label>
-                                <input type="text" class="form-control is-valid" id="validationServer02"  name = "autor"value="Otto" required>
+                                <input type="text" class="form-control " id="validationServer02"  name = "autor" required>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
@@ -211,10 +272,9 @@
                                 <div class="mb-3">
                                     
                                     <input type="date" class="form-control" id="editar-tarea-fecha" name="fecha">
-                                </div>
-                                    Please provide a valid city.
-                                </div>
+
      
+                                    
                              <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Portada</span>
                      <input type="file" class="form-control" name="foto"  placeholder="url foto" aria-label="Username" aria-describedby="basic-addon1" required="true" accept=".jpg, .jpeg">
@@ -300,20 +360,21 @@
         
         
                 <!-- Modal de confirmacion de la accion eliminar  -->
-   
+           
+                
        
        
-       
-       <div class="modal fade" id="eliminarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                
+    <div class="modal fade" id="eliminarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="eliminarLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
                 <h2 align="center">¿Estás seguro de que deseas eliminar esta tarea?</h2>
-                <form action="SvEliminar" method="GET">
+                <form action="SvEliminar" method="POST">
                     <!-- Agregar un campo de entrada para mostrar el ID de la tarea -->
                     <input type="text" id="inputEliminar" name="inputEliminar" hidden>
-
+            
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="margin-right: 10px; background-color: #512da8">Cancelar
@@ -323,7 +384,8 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
+       
 
         
         <!-- Bootstrap core JS-->
@@ -367,12 +429,12 @@
         
         var button = $(event.relatedTarget); // Botón que activó el modal
         
-        var tiEliminar = button.data('tituloEliminar'); // Obtén el valor de la variable desde el botón
+        var tiEliminar = button.data('eliminar'); // Obtén el valor de la variable desde el botón
         
            $('#inputEliminar').val(tiEliminar);
         
         var modal = $(this);
-        
+        console.log(tiEliminar);
          id = tiEliminar;
         
     });

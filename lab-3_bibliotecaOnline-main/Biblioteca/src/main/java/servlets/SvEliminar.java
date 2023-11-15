@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,21 +26,27 @@ import javax.servlet.http.HttpServletResponse;
 public class SvEliminar extends HttpServlet {
     
   Lista listaLibros = new Lista();
+   
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+   
        
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+        
+           ServletContext context =getServletContext();
+        
       try {
-          listaLibros = Serializacion.leerArchivo(request.getServletContext());
+          listaLibros = Serializacion.leerArchivo(context);
       } catch (ClassNotFoundException ex) {
           Logger.getLogger(SvEliminar.class.getName()).log(Level.SEVERE, null, ex);
+          
+          System.out.println("no esta funcionando");
       }
       
       String titulo = request.getParameter("inputEliminar");
@@ -48,9 +55,11 @@ public class SvEliminar extends HttpServlet {
       
       listaLibros.eliminarLibro(titulo);
       
-      Serializacion.escribirArchivo(listaLibros, request.getServletContext());
+      Serializacion.escribirArchivo(listaLibros, context);
           response.sendRedirect("Login.jsp");
-
+            
+      
+     
     }
 
   
@@ -58,6 +67,7 @@ public class SvEliminar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
    
