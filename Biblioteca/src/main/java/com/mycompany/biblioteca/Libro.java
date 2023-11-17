@@ -61,21 +61,7 @@ public class Libro implements Serializable {
     public void setAnio(String Anio) {
         this.Anio = Anio;
     }
-    public Libro getSiguiente() {
-        return siguiente;
-    }
 
-    public void setSiguiente(Libro siguiente) {
-        this.siguiente = siguiente;
-    }
-
-    public Libro getAnterior() {
-        return anterior;
-    }
-
-    public void setAnterior(Libro anterior) {
-        this.anterior = anterior;
-    }
 }
    
 

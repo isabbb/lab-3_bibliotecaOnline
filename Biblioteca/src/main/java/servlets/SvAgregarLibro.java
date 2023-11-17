@@ -54,12 +54,12 @@ public class SvAgregarLibro extends HttpServlet {
             Logger.getLogger(SvAgregarLibro.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-        System.out.println("Título del libro recibido: " + request.getParameter("titulo"));
+//        System.out.println("Título del libro recibido: " + request.getParameter("titulo"));
         
          String titulo = request.getParameter("titulo").trim();
         try {
             Libro libro = listaLibros.buscarLibro(titulo, request);
-            System.out.println(libro);
+//            System.out.println(libro);
             
             if (libro != null) {
             // Genera la respuesta HTML con los detalles del perro
@@ -70,10 +70,10 @@ public class SvAgregarLibro extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(libroHtml);
             
-             System.out.println("---------------------------------------###################--------------------");
-                System.out.println(libroHtml);
-                        
-             System.out.println("---------------------------------------###################-----------------");
+//             System.out.println("---------------------------------------###################--------------------");
+//                System.out.println(libroHtml);
+//                        
+//             System.out.println("---------------------------------------###################-----------------");
         } else {
             // Maneja el caso en el que no se encuentra el perro
             response.setContentType("text/plain");
@@ -95,7 +95,7 @@ public class SvAgregarLibro extends HttpServlet {
            ServletContext context = getServletContext();
         
         try {
-            listaLibros = Serializacion.leerArchivo(context);
+            listaLibros = Serializacion.leerArchivo(context); 
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SvAgregarLibro.class.getName()).log(Level.SEVERE, null, ex);

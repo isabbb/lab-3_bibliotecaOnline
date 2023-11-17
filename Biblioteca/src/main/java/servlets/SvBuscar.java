@@ -24,10 +24,7 @@ public class SvBuscar extends HttpServlet {
             throws ServletException, IOException {
         
 
-        String terminoBusqueda = request.getParameter("tiauto"); //Se obtiene el usuario 
-        //Redirigimos con la variable para que cambie la tabla
-        System.out.println(terminoBusqueda);
-        response.sendRedirect("Login.jsp?search="+terminoBusqueda);
+ 
 
          
     }
@@ -37,8 +34,11 @@ public class SvBuscar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+               String terminoBusqueda = request.getParameter("tiauto"); //Se obtiene el usuario 
+        //Redirigimos con la variable para que cambie la tabla
+        System.out.println(terminoBusqueda);
+        response.sendRedirect("Login.jsp?search="+terminoBusqueda);
         
-        processRequest(request, response);
     }
 
    

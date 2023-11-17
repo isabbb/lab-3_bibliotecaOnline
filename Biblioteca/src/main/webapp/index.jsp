@@ -6,14 +6,14 @@
 <!DOCTYPE html>
 <%@include file= "templates/header.jsp" %>
 
-<section class="vh-100" style="background-image: linear-gradient(#d9ed92, #b5e48c, #99d98c);">
+<section class="vh-100" style="background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);"width="100%">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <img src="https://media.istockphoto.com/id/1160800882/es/foto/un-estante-lleno-de-libros-cerca-de-una-ventana.jpg?s=612x612&w=is&k=20&c=CR4D-uoE5OpL94drC59q_UGPLQDs3KsPeW8UJXW_tNE="width="100%"
+                            <img src="https://i.pinimg.com/564x/91/85/54/91855436953116fcebd285e613d87f23.jpg"width="87%"
                                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                         </div>
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">

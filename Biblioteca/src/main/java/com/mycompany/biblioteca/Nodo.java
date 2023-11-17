@@ -15,10 +15,28 @@ public class Nodo implements Serializable {
     public Libro libro;
     Nodo siguiente, anterior;
     
-    public Nodo ( Libro libro){
+    public Nodo ( Libro libro, Nodo ant, Nodo sig){
         this.libro=libro;
-        siguiente = null;
-        anterior = null;
+        siguiente = sig;
+        anterior = ant;
+        
     }
-    
+
+    public Nodo getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Nodo siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public Nodo getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(Nodo anterior) {
+        this.anterior = anterior;
+    }
 }
+
+   
