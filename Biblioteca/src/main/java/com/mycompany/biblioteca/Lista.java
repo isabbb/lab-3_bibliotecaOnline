@@ -64,7 +64,7 @@
         tablaHTML.append("<td>").append(libro.getPortada()).append("</td>");
 
         tablaHTML.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
-        tablaHTML.append("<form action=\"SvPrestamo\" method=\"GET\" ><input type=\"text\" name=\"tia\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-pen-clip\"></i></button></form>");
+        tablaHTML.append("<form action=\"SvPrestamo\" method=\"GET\" ><input type=\"text\" name=\"tiPres\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-pen-clip\"></i></button></form>");
         tablaHTML.append ("<form action=\"SvEliminar\" method=\"GET\" ><input type=\"text\" name=\"inputEliminar\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-danger\"><i class=\"fa-solid fa-trash\"></i></button></form></  td>");
    
 
@@ -161,36 +161,38 @@
 }
 
     
+    
+    
+    public String tablaPrestamo (HttpServletRequest request){
+        StringBuilder tablaPrestamo = new StringBuilder();
+        Nodo actual = iNodo;
+
+        while (actual !=null){
+
+
+        Libro libro = actual.libro;
+        tablaPrestamo.append("<tr>");
+        tablaPrestamo.append("<td>").append(libro.getTitulo()).append("</td>");
+        tablaPrestamo.append("<td>").append(libro.getAutor()).append("</td>");
+        tablaPrestamo.append("<td>").append(libro.getAnio()).append("</td>");
+        tablaPrestamo.append("<td>").append(libro.getPortada()).append("</td>");
+
+        tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+        tablaPrestamo.append("<a href=\"SvPrestamo?idLibro=\""+libro.getTitulo()+"\" type=\"button\" class=\"btn btn-outline-success\"  data-nombre=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-pen-clip\"></i></a>");
+        tablaPrestamo.append("<a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#eliminarModal\" data-eliminar=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-trash\"></i></a></td>");
+
+    }
+          
+        
+
+            tablaPrestamo.append("</table>");  // Cierra la tabla
+
+            return tablaPrestamo.toString(); //Se devuelve la tabla
+
+
+    }
     }
     
-//    public String tablaPrestamo (HttpServletRequest request){
-//          StringBuilder tablaPrestamo = new StringBuilder();
-//        Nodo actual = iNodo;
-//              
-//    while (actual !=null){
-////    if (terminoBusqueda.equalsIgnoreCase(actual.libro.getAutor()) || terminoBusqueda.equalsIgnoreCase(actual.libro.getTitulo())){
-////
-////    Libro libro = actual.libro;
-////    tablaPrestamo.append("<tr>");
-////    tablaPrestamo.append("<td>").append(libro.getTitulo()).append("</td>");
-////    tablaPrestamo.append("<td>").append(libro.getAutor()).append("</td>");
-////    tablaPrestamo.append("<td>").append(libro.getAnio()).append("</td>");
-////    tablaPrestamo.append("<td>").append(libro.getPortada()).append("</td>");
-////
-////    tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
-////    tablaPrestamo.append("<a href=\"SvPrestamo?idLibro=\""+libro.getTitulo()+"\" type=\"button\" class=\"btn btn-outline-success\"  data-nombre=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-pen-clip\"></i></a>");
-////    tablaPrestamo.append("<a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#eliminarModal\" data-eliminar=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-trash\"></i></a></td>");
-////
-////    }
-////    actual = actual.siguiente;
-////    }
-////    tablaPrestamo.append("</table>");  // Cierra la tabla
-//
-//    return tablaPrestamo.toString(); //Se devuelve la tabla
-//
-//
-//    }
-//    
-//    
+    
     
     

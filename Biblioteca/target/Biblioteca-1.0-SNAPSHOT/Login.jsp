@@ -13,13 +13,21 @@
       
       boolean verificar = listaLibro.verificar();
       
-      String ident = "";
-      
        Lista libros = new Lista ();
        libros=Serializacion.leerArchivo(context);
+     String tablaHTML = Serializacion.listarLibros(terminoBusqueda, context, request);
+     
+     Lista librosPrest = new Lista ();
+     
+     librosPrest = Serializacion.leerPrestamo(context);
+     boolean bandera = librosPrest.verificar();
+     
 
-      
-     String tablaHTML = Serializacion.listarLibros(terminoBusqueda, context, request); %>
+     String prestamoHTML = Serializacion.listarPrestamos(context, request);
+     
+
+%>
+     
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -178,7 +186,7 @@
                     <div>
                           <%
                             //Condicional if para saber si existen tareas en el archivo
-                            if (!verificar) {
+                            if (!bandera) {
                         %>
                         <tr>
                             <td colspan='6' align='center' valign='middle'>No se han registrado Libro</td>
@@ -187,7 +195,7 @@
                             }
                         %>
                             
-                        <%= tablaHTML%>
+                        <%= prestamoHTML%>
                             
                             </div>
                         </tr>

@@ -70,12 +70,9 @@ public class SvAgregarLibro extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(libroHtml);
             
-//             System.out.println("---------------------------------------###################--------------------");
-//                System.out.println(libroHtml);
-//                        
-//             System.out.println("---------------------------------------###################-----------------");
+
         } else {
-            // Maneja el caso en el que no se encuentra el perro
+            // Maneja el caso en el que no se encuentra el libro
             response.setContentType("text/plain");
             response.getWriter().write("Libro no encontrado");
             

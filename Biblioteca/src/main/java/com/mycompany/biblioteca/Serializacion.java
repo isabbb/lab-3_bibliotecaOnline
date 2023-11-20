@@ -14,6 +14,7 @@
     import java.io.IOException;
     import java.io.ObjectInputStream;
     import java.io.ObjectOutputStream;
+import java.io.RandomAccessFile;
     import javax.servlet.ServletContext;
     import javax.servlet.http.HttpServletRequest;
 
@@ -40,7 +41,9 @@
         }
 
        public static Lista leerArchivo(ServletContext context) throws IOException, ClassNotFoundException {
+           
         Lista lLibros = new Lista();
+        
         String rutaRelativa = "/data/librosAgregados.ser";
         String rutaAbsoluta = context.getRealPath(rutaRelativa);
         File archivo = new File(rutaAbsoluta);
@@ -60,6 +63,45 @@
 
         return lLibros;
     }
+       
+       
+  public static void escribirPrestamo(Lista lLibros, ServletContext context) throws FileNotFoundException, IOException {
+
+    String rutaRelativa = "/data/librosPrestados.ser";
+    String rutaAbsoluta = context.getRealPath(rutaRelativa);
+
+    try (FileOutputStream fos = new FileOutputStream(new File(rutaAbsoluta));
+         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+
+        oos.writeObject(lLibros);
+    } catch (IOException e) {
+        System.out.println("Error al escribir");
+    }
+}
+
+public static Lista leerPrestamo(ServletContext context) throws IOException, ClassNotFoundException {
+    Lista lLibros = new Lista();
+    String rutaRelativa = "/data/librosPrestados.ser";
+    String rutaAbsoluta = context.getRealPath(rutaRelativa);
+    File archivo = new File(rutaAbsoluta);
+
+    try {
+        RandomAccessFile raf = new RandomAccessFile(archivo, "r");
+        try (FileInputStream fis = new FileInputStream(raf.getFD());
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+
+            lLibros = (Lista) ois.readObject();
+        } catch (EOFException e) {
+            System.out.println("El archivo está vacío");
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo"); 
+        }
+      } catch (FileNotFoundException e) {
+        System.out.println("El archivo no existe");
+    }
+
+    return lLibros;
+}
          public static String listarLibros (String terminoBusqueda,ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
            //Llenamos la lista con la informacion del archivo
            Lista listaLibro = leerArchivo(context);
@@ -79,19 +121,23 @@
                return tabla;
     }
          
-//         public static Libro buscarLibro (String titulo, ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
-//              Lista bLibro = leerArchivo(context);
-//              
-//              Nodo actual = bLibro.agregar(libro);
-//              while ()
-//              
-//                 if (i.getTitulo().equals(titulo)){
-//                
-//                return i; // retorna le perro si se encuentra 
-//            }
-//        }
-//        return null; // retorna null si no se encuentra el perro
-//    }
+         
+               public static String listarPrestamos (ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
+           //Llenamos la lista con la informacion del archivo
+           Lista listaLibro = leerPrestamo(context);
+           //En caso de estar vacia se crea una
+            if (listaLibro == null) {
+                 listaLibro = new Lista();
+            }
+           String tabla="";//Variable que contiene la tabla
+
+          tabla = listaLibro.tablaPrestamo(request);
+               
+
+               return tabla;
+    }
+       
+
     }
 
              
