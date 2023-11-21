@@ -19,11 +19,23 @@ import java.io.RandomAccessFile;
     import javax.servlet.http.HttpServletRequest;
 
     /**
-     *
-     * @author ***
-     */
+    * Clase utilizada para la serialización y deserialización de objetos Lista.
+    * Proporciona métodos para escribir y leer información de libros y préstamos en archivos.
+    * También incluye funciones para listar libros y préstamos basados en términos de búsqueda.
+    * 
+    * @author ***
+    */
     public class Serializacion {
-
+            
+    /**
+     * Escribe la información de la Lista de libros en un archivo serializado.
+     * 
+     * @param lLibros Lista de libros a serializar.
+     * @param context Contexto del servlet para obtener la ruta del archivo.
+     * @throws FileNotFoundException, Si no se encuentra el archivo.
+     * @throws IOException, Si ocurre un error de entrada/salida durante la escritura.
+     */
+            
         public static void escribirArchivo(Lista lLibros, ServletContext context) throws FileNotFoundException, IOException {
 
             String rutaRelativa = "/data/librosAgregados.ser";
@@ -39,7 +51,16 @@ import java.io.RandomAccessFile;
                 System.out.println("Error al escribir");
             }
         }
-
+            
+       /**
+     * Lee la información de la Lista de libros desde un archivo serializado.
+     * 
+     * @param context Contexto del servlet para obtener la ruta del archivo.
+     * @return Lista de libros leída desde el archivo.
+     * @throws IOException, Si ocurre un error de entrada/salida durante la lectura.
+     * @throws ClassNotFoundException, Si la clase no se encuentra durante la deserialización.
+     */
+            
        public static Lista leerArchivo(ServletContext context) throws IOException, ClassNotFoundException {
            
         Lista lLibros = new Lista();
@@ -63,7 +84,14 @@ import java.io.RandomAccessFile;
 
         return lLibros;
     }
-       
+     /**
+     * Escribe la información de la Lista de préstamos en un archivo serializado.
+     * 
+     * @param lLibros Lista de préstamos a serializar.
+     * @param context Contexto del servlet para obtener la ruta del archivo.
+     * @throws FileNotFoundException, Si no se encuentra el archivo.
+     * @throws IOException, Si ocurre un error de entrada/salida durante la escritura.
+     */  
        
   public static void escribirPrestamo(Lista lLibros, ServletContext context) throws FileNotFoundException, IOException {
 
@@ -78,7 +106,16 @@ import java.io.RandomAccessFile;
         System.out.println("Error al escribir");
     }
 }
-
+            
+/**
+     * Lee la información de la Lista de préstamos desde un archivo serializado.
+     * 
+     * @param context Contexto del servlet para obtener la ruta del archivo.
+     * @return Lista de préstamos leída desde el archivo.
+     * @throws IOException, Si ocurre un error de entrada/salida durante la lectura.
+     * @throws ClassNotFoundException, Si la clase no se encuentra durante la deserialización.
+     */
+            
 public static Lista leerPrestamo(ServletContext context) throws IOException, ClassNotFoundException {
     Lista lLibros = new Lista();
         
@@ -101,6 +138,16 @@ public static Lista leerPrestamo(ServletContext context) throws IOException, Cla
 
         return lLibros;
 }
+            /**
+           * Lista libros según un término de búsqueda y devuelve una representación en forma de tabla HTML.
+           * 
+           * @param terminoBusqueda,Término de búsqueda para filtrar los resultados.
+           * @param context ,Contexto del servlet para obtener la información del archivo.
+           * @param request, Objeto HttpServletRequest necesario para la búsqueda.
+           * @return Una cadena de texto que contiene el código HTML de la tabla de libros.
+           * @throws IOException, Si ocurre un error de entrada/salida durante la lectura.
+           * @throws ClassNotFoundException, Si la clase no se encuentra durante la deserialización.
+           */
          public static String listarLibros (String terminoBusqueda,ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
            //Llenamos la lista con la informacion del archivo
            Lista listaLibro = leerArchivo(context);
@@ -121,28 +168,55 @@ public static Lista leerPrestamo(ServletContext context) throws IOException, Cla
     }
          
          
-              public static String listarPrestamos (String terminoBusqueda, ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
-           //Llenamos la lista con la informacion del archivo
-           Lista listaLibro = leerPrestamo(context);
-                  
-           //En caso de estar vacia se crea una
-            if (listaLibro == null) {
-                 listaLibro = new Lista();
-            }
-           String tabla="";//Variable que contiene la tabla}
-           
-                if (terminoBusqueda==null){
-               tabla = listaLibro.tablaPrestamo();
-           }else if (!terminoBusqueda.isEmpty() ){
-               tabla = listaLibro.tablaBusquedaPrestamo(terminoBusqueda, request);
-           }
+            // Método para listar todos los préstamos almacenados en un archivo
+    public static String listarPrestamos(String terminoBusqueda, ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException {
 
-               return tabla; 
+        // Leemos el archivo que contiene la información de los préstamos y la almacenamos en una lista llamada "listaLibro"
+        Lista listaLibro = leerPrestamo(context);
+
+        // En caso de que la lista esté vacía, creamos una nueva lista
+        if (listaLibro == null) {
+            listaLibro = new Lista();
+        }
+
+        String tabla = ""; // Variable que almacenará la tabla que se mostrará en la interfaz web
+
+        // Si no se ha ingresado ningún término de búsqueda, se mostrará la tabla con todos los préstamos almacenados
+        if (terminoBusqueda == null) {
+            tabla = listaLibro.tablaPrestamo();
+        }
+        // Si se ha ingresado un término de búsqueda, se mostrará la tabla con los préstamos que coincidan con ese término
+        else if (!terminoBusqueda.isEmpty()) {
+            tabla = listaLibro.tablaBusquedaPrestamo(terminoBusqueda, request);
+        }
+
+        return tabla; // Retornamos la tabla que se mostrará en la interfaz web
     }
 
-    
-
+    // Método para leer el archivo que contiene la información de los préstamos
+    public static Lista leerPrestamo(ServletContext context) throws IOException, ClassNotFoundException {
+        // ... Código para leer el archivo y almacenar la información en una lista llamada "listaLibro" ...
+        return listaLibro;
     }
+
+    // Clase que representa una lista de préstamos
+    public static class Lista implements Serializable {
+
+        // ... Variables y métodos para la lista de préstamos ...
+
+        // Método para crear una tabla con todos los préstamos almacenados en la lista
+        public String tablaPrestamo() {
+            // ... Código para crear la tabla ...
+            return tabla;
+        }
+
+        // Método para crear una tabla con los préstamos que coincidan con un término de búsqueda
+        public String tablaBusquedaPrestamo(String terminoBusqueda, HttpServletRequest request) {
+            // ... Código para crear la tabla ...
+            return tabla;
+        }
+    }
+}
 
              
              
