@@ -82,10 +82,6 @@
     public Libro buscarLibro (String titulo,HttpServletRequest request) throws IOException, ClassNotFoundException{
 
         Nodo actual = iNodo;
-
-        System.out.println(titulo);
-
-
             while (actual !=null ){
             Libro libro = actual.libro;
 
@@ -98,6 +94,13 @@
     }
     return null;
 
+    }
+    
+    public boolean libroExiste (String terminoBusqueda, HttpServletRequest request) throws IOException, ClassNotFoundException{
+     if( buscarLibro(terminoBusqueda, request)!=null){
+         return true;
+     }   
+        return false;
     }
     
     public String tablaBusqueda (String terminoBusqueda, HttpServletRequest request){

@@ -4,7 +4,6 @@ servlets\SvLogin.class
 com\mycompany\biblioteca\Nodo.class
 com\mycompany\biblioteca\Lista.class
 servlets\SvEliminar.class
-servlets\SvVerPrestamo.class
 servlets\SvPrestamo.class
 com\mycompany\biblioteca\Serializacion.class
 servlets\SvBuscar.class

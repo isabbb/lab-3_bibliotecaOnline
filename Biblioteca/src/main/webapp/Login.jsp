@@ -11,6 +11,7 @@
      
       listaLibro = Serializacion.leerArchivo(context);
       
+      //si libros disponibles esta vacio
       boolean verificar = listaLibro.verificar();
       
       
@@ -21,7 +22,22 @@
      Lista librosPrest = new Lista ();
      
      librosPrest = Serializacion.leerPrestamo(context);
+     
+     //si libros prestados esta vacio
      boolean bandera = librosPrest.verificar();
+     
+     //Verificando si existe el libro buscado en libros disponibles
+     boolean libroDisponible = libros.libroExiste(terminoBusqueda, request);
+     
+     //Verificando si existe el libro en libros prestados
+     boolean prestamoDisponible = librosPrest.libroExiste(terminoBusqueda, request);
+     
+     //si el libro esta en disponibles y no en prestamo
+     boolean libroNoEnPrestamo = libroDisponible && !prestamoDisponible;
+     
+     
+     //si el libro esta en prestamo y no en disponibles
+    boolean libroNoEnDisponibles = !libroDisponible && prestamoDisponible;
      
 
      String prestamoHTML = Serializacion.listarPrestamos(terminoBusqueda, context, request);    
@@ -127,15 +143,21 @@
                     <div>
                           <%
                             //Condicional if para saber si existen tareas en el archivo
-                            if (!verificar || (terminoBusqueda == null && !verificar)) {
+                            if (!verificar) {
                         %>
                         <tr>
                             <td colspan='6' align='center' valign='middle'>No se han registrado Libro</td>
                         </tr>
                         <%
+                            }else if (libroNoEnDisponibles){
+                        %>
+                               <tr>
+                            <td colspan='6' align='center' valign='middle'>Su busqueda no se encuentra en libros disponibles o no existe el libro</td>
+                        </tr>
+                        <%
                             }
                         %>
-                            
+                        
                         <%= tablaHTML%>
                             
                             </div>
@@ -187,22 +209,16 @@
                     <div>
                           <%
                             //Condicional if para saber si existen tareas en el archivo
-                            if (!bandera  ) {
-                        %>
+                            if (!bandera) { %>
                         <tr>
                             <td colspan='6' align='center' valign='middle'>No hay libros</td>
                         </tr>
-                        <%
-                            }else if (terminoBusqueda != null && !bandera){
-
-                        %>
+                        <%}else if (libroNoEnPrestamo){ %>
                         <tr>
                             <td colspan='6' align='center' valign='middle'>Su busqueda no se encuentra en prestamos o no existe el libro</td>
                         </tr>
                         
-                        <%
-                            }
-                          %>
+                        <%}%>
                             
                         <%= prestamoHTML%>
                             
@@ -365,29 +381,6 @@
                  <div class="modal-body"> 
                   
                      <div id="libro-details"> 
-                         <!-- Aquí se añade los detalles del perro-->
-                </div>
-                 </div> 
-                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> 
-                </div>
-             </div> 
-         </div> 
-     </div>
-        
-        
-         <!-- modal donde se muestran los libros prestados-->
-
-    <div class="modal fade" id="modalPrestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
-         <div class="modal-dialog"> 
-             <div class="modal-content"> 
-                 <div class="modal-header"> 
-                    <h5 class="modal-title" id="exampleModalLabel">Detalles del Libro</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
-                 </div>
-                 <div class="modal-body"> 
-                  
-                     <div id="libroPres-details"> 
                          <!-- Aquí se añade los detalles del perro-->
                 </div>
                  </div> 
