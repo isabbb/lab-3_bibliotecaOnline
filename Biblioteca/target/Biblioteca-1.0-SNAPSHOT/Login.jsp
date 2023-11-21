@@ -187,14 +187,22 @@
                     <div>
                           <%
                             //Condicional if para saber si existen tareas en el archivo
-                            if (!bandera  || (terminoBusqueda == null && !bandera)) {
+                            if (!bandera  ) {
                         %>
                         <tr>
-                            <td colspan='6' align='center' valign='middle'>No se han registrado Libro</td>
+                            <td colspan='6' align='center' valign='middle'>No hay libros</td>
                         </tr>
                         <%
-                            }
+                            }else if (terminoBusqueda != null && !bandera){
+
                         %>
+                        <tr>
+                            <td colspan='6' align='center' valign='middle'>Su busqueda no se encuentra en prestamos o no existe el libro</td>
+                        </tr>
+                        
+                        <%
+                            }
+                          %>
                             
                         <%= prestamoHTML%>
                             
@@ -370,7 +378,7 @@
         
          <!-- modal donde se muestran los libros prestados-->
 
-    <div class="modal fade" id="ModalPrestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+    <div class="modal fade" id="modalPrestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
          <div class="modal-dialog"> 
              <div class="modal-content"> 
                  <div class="modal-header"> 
@@ -391,12 +399,10 @@
      </div>
         
         
-                <!-- Modal de confirmacion de la accion eliminar  -->
-           
-                
-       
-       
-                
+         
+         
+         
+                <!-- Modal de confirmacion de la accion eliminar  -->           
     <div class="modal fade" id="eliminarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="eliminarLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -454,50 +460,13 @@
   });
   
 </script>
-<script>
-    // funcion para mostrar los datos en la ventana modal
-  $('#ModalPrestamo').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Bot√≥n que desencaden√≥ el evento
-    var titulo= button.data('titulo'); // Obt√©n el nombre del 
-
-    // Realiza una solicitud AJAX al servlet para obtener los detalles del perro por su nombre
-    $.ajax({
-      url: 'SvAgregarLibro?titulo=' + titulo, // Cambia 'id' por el nombre del par√°metro que esperas en tu servlet
-      method: 'GET',
-      success: function (data) {
-        // Actualiza el contenido del modal con los detalles del perro
-        $('#libroPres-details').html(data);
-      },
-      error: function () {
-        // Maneja errores aqu√≠ si es necesario y se imprime en consola
-        console.log('Error al cargar los detalles del libro.');
-      }
-    });
-  });
-  
-</script>
 
 
 
 
 
-<script>
-    
-    var id = "";
-    $('#eliminarModal').on('show.bs.modal', function (event) {
-        
-        var button = $(event.relatedTarget); // BotÛn que activÛ el modal
-        
-        var tiEliminar = button.data('eliminar'); // ObtÈn el valor de la variable desde el botÛn
-        
-           $('#inputEliminar').val(tiEliminar);
-        
-        var modal = $(this);
-        console.log(tiEliminar);
-         id = tiEliminar;
-        
-    });
-</script>
+
+
 
 
     </body>

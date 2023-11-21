@@ -35,6 +35,7 @@ import static jdk.jpackage.internal.Arguments.CLIOptions.context;
 public class SvAgregarLibro extends HttpServlet {
     
     Lista listaLibros = new Lista();
+    Lista listaPrestamo = new Lista ();
 
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -50,17 +51,30 @@ public class SvAgregarLibro extends HttpServlet {
         
         
              String titulo = request.getParameter("titulo").trim();
-                 // si se va a ver un libro de los disponibles 
+          
+             
+             //leemos los libros disponibles
                     try {
             listaLibros = Serializacion.leerArchivo(request.getServletContext());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SvAgregarLibro.class.getName()).log(Level.SEVERE, null, ex);
         }
+                    
+                  //leemos los libros prestados  
+        try {
+            listaPrestamo = Serializacion.leerPrestamo(request.getServletContext());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SvAgregarLibro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
         try {
             Libro libro = listaLibros.buscarLibro(titulo, request);
+            Libro libroPres = listaPrestamo.buscarLibro(titulo, request);
 
             
-            if (libro != null) {
+            if (libroPres == null && libro !=null) {
             // Genera la respuesta HTML con los detalles del perro
             String libroHtml = "<h2>Titulo: " + libro.getTitulo() + "</h2>" +
                                "<p>Autor: " + libro.getAutor() + "</p>" +
@@ -69,7 +83,14 @@ public class SvAgregarLibro extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(libroHtml);
             
-
+            }else if (libro == null && libroPres !=null){
+                 String libroHtml = "<h2>Titulo: " + libroPres.getTitulo() + "</h2>" +
+                               "<p>Autor: " + libroPres.getAutor() + "</p>" +
+                               "<p>Año: " + libroPres.getAnio() + "</p>" +
+                               "<img src='imgLibros/" + libroPres.getPortada()+ "' alt='" + libroPres.getTitulo() + "' width='100%'/>";
+            response.setContentType("text/html");
+            response.getWriter().write(libroHtml);
+                
         } else {
             // Maneja el caso en el que no se encuentra el libro
             response.setContentType("text/plain");

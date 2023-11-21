@@ -174,7 +174,7 @@ public String tablaPrestamo (){
         tablaPrestamo.append("<td>").append(libro.getAnio()).append("</td>");
         tablaPrestamo.append("<td>").append(libro.getPortada()).append("</td>");
 
-       tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#ModalPrestamo\" data-tituloP=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+  tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
         tablaPrestamo.append ("<form action=\"SvDevolver\" method=\"GET\" ><input type=\"text\" name=\"devolver\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-retweet\"></i></button></form></  td>");
 
         tablaPrestamo.append("</tr>");
@@ -201,8 +201,8 @@ public String tablaPrestamo (){
         tablaPrestamo.append("<td>").append(libro.getAnio()).append("</td>");
         tablaPrestamo.append("<td>").append(libro.getPortada()).append("</td>");
 
-         tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-tituloP=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
-        tablaPrestamo.append ("<form action=\"SvDevolver\" method=\"GET\" ><input type=\"text\" name=\"devolver\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-retweet\"></i></button></form></  td>");
+         tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+      tablaPrestamo.append ("<form action=\"SvDevolver\" method=\"GET\" ><input type=\"text\" name=\"devolver\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-retweet\"></i></button></form></  td>");
 
         tablaPrestamo.append("</tr>");
        
