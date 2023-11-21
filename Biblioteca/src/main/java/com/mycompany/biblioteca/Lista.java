@@ -178,24 +178,43 @@
 
         while (actual != null) {
             if (actual.libro.getTitulo().equals(titulo)) {
-                if (actual == iNodo) {
+                
+                if (actual == iNodo) {//si el libro es igual a primer nodo
+                    
+                    //pasa a ser el siguiente nodo
                     iNodo = iNodo.siguiente;
+                    
+                    // si el nodo siguiente no es igual a nulo
                     if (iNodo != null) {
+                        //nodo anterior pasa a ser nulo
                         iNodo.anterior = null;
                     }
                     return; // Sale del método después de eliminar el primer nodo
-                } else if (actual == fNodo) {
+                    
+                } else if (actual == fNodo) {// si es igual al anterior nodo 
+                    //pasa a ser el anterior nodo 
                     fNodo = fNodo.anterior;
+
+                    //si el nodo anterior no es nulo 
                     if (fNodo != null) {
+                        //El nodo siguiente es igual a nulo 
                         fNodo.siguiente = null;
                     }
                     return; // Sale del método después de eliminar el último nodo
+                    
                 } else {
+                    // si el libro a eliminar no esta ni al principio nio al final 
+
+                    //el nodo anterior pasa a apuntar al siguiente del que quiere eliminar saltandose el actual 
                     anterior.siguiente = actual.siguiente;
+
+                    // el nodo siguiente pasa a apuntar al aterior del libro eliminado saltandose el actual 
                     actual.siguiente.anterior = anterior;
+                    
                     return; // Sale del método después de eliminar un nodo en el medio de la lista
                 }
             }
+            //para seguir recorriendo la lista 
             anterior = actual;
             actual = actual.siguiente;
         }
@@ -206,7 +225,8 @@
 public String tablaPrestamo (){
         StringBuilder tablaPrestamo = new StringBuilder();
         Nodo actual = iNodo; 
-
+    
+      // Si hay nodos en la lista
         if (actual != null) {
         //Se recorre la lista
         while (actual != null) {
@@ -216,8 +236,9 @@ public String tablaPrestamo (){
         tablaPrestamo.append("<td>").append(libro.getAutor()).append("</td>");
         tablaPrestamo.append("<td>").append(libro.getAnio()).append("</td>");
         tablaPrestamo.append("<td>").append(libro.getPortada()).append("</td>");
-
-  tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+            
+        // Acción de ver detalles y devolver el libro
+        tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
         tablaPrestamo.append ("<form action=\"SvDevolver\" method=\"GET\" ><input type=\"text\" name=\"devolver\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-retweet\"></i></button></form></  td>");
 
         tablaPrestamo.append("</tr>");
