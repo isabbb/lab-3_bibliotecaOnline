@@ -64,7 +64,7 @@
         tablaHTML.append("<td>").append(libro.getPortada()).append("</td>");
 
         tablaHTML.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
-        tablaHTML.append("<form action=\"SvPrestamo\" method=\"GET\" ><input type=\"text\" name=\"tiPres\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-pen-clip\"></i></button></form>");
+        tablaHTML.append("<form action=\"SvPrestamo\" method=\"GET\" ><input type=\"text\" name=\"tiPres\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-cart-shopping\"></i></button></form>");
         tablaHTML.append ("<form action=\"SvEliminar\" method=\"GET\" ><input type=\"text\" name=\"inputEliminar\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-danger\"><i class=\"fa-solid fa-trash\"></i></button></form></  td>");
    
 
@@ -114,10 +114,9 @@
         tablaHTML.append("<td>").append(libro.getAnio()).append("</td>");
         tablaHTML.append("<td>").append(libro.getPortada()).append("</td>");
 
-        tablaHTML.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
-        tablaHTML.append("<a href=\"SvPrestamo?idLibro=\""+libro.getTitulo()+"\" type=\"button\" class=\"btn btn-outline-success\"  data-nombre=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-pen-clip\"></i></a>");
-        tablaHTML.append("<a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#eliminarModal\" data-eliminar=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-trash\"></i></a></td>");
-
+       tablaHTML.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+        tablaHTML.append("<form action=\"SvPrestamo\" method=\"GET\" ><input type=\"text\" name=\"tiPres\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-pen-clip\"></i></button></form>");
+        tablaHTML.append ("<form action=\"SvEliminar\" method=\"GET\" ><input type=\"text\" name=\"inputEliminar\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-danger\"><i class=\"fa-solid fa-trash\"></i></button></form></  td>");
         }
         actual = actual.siguiente;
         }
@@ -160,16 +159,14 @@
     }
 }
 
-    
-    
-    
-    public String tablaPrestamo (HttpServletRequest request){
+
+public String tablaPrestamo (){
         StringBuilder tablaPrestamo = new StringBuilder();
-        Nodo actual = iNodo;
+        Nodo actual = iNodo; 
 
-        while (actual !=null){
-
-
+        if (actual != null) {
+        //Se recorre la lista
+        while (actual != null) {
         Libro libro = actual.libro;
         tablaPrestamo.append("<tr>");
         tablaPrestamo.append("<td>").append(libro.getTitulo()).append("</td>");
@@ -177,20 +174,19 @@
         tablaPrestamo.append("<td>").append(libro.getAnio()).append("</td>");
         tablaPrestamo.append("<td>").append(libro.getPortada()).append("</td>");
 
-        tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
-        tablaPrestamo.append("<a href=\"SvPrestamo?idLibro=\""+libro.getTitulo()+"\" type=\"button\" class=\"btn btn-outline-success\"  data-nombre=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-pen-clip\"></i></a>");
-        tablaPrestamo.append("<a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#eliminarModal\" data-eliminar=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-trash\"></i></a></td>");
+         tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+        tablaPrestamo.append ("<form action=\"SvDevolver\" method=\"GET\" ><input type=\"text\" name=\"devolver\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-retweet\"></i></button></form></  td>");
 
+        tablaPrestamo.append("</tr>");
+        actual = actual.siguiente;
+        }
     }
-          
-        
 
-            tablaPrestamo.append("</table>");  // Cierra la tabla
+        tablaPrestamo.append("</table>");  // Cierra la tabla
 
-            return tablaPrestamo.toString(); //Se devuelve la tabla
-
-
+        return tablaPrestamo.toString();//Se manda la tabla creada
     }
+    
     }
     
     

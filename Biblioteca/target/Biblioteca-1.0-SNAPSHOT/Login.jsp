@@ -13,6 +13,7 @@
       
       boolean verificar = listaLibro.verificar();
       
+      
        Lista libros = new Lista ();
        libros=Serializacion.leerArchivo(context);
      String tablaHTML = Serializacion.listarLibros(terminoBusqueda, context, request);

@@ -81,26 +81,25 @@ import java.io.RandomAccessFile;
 
 public static Lista leerPrestamo(ServletContext context) throws IOException, ClassNotFoundException {
     Lista lLibros = new Lista();
-    String rutaRelativa = "/data/librosPrestados.ser";
-    String rutaAbsoluta = context.getRealPath(rutaRelativa);
-    File archivo = new File(rutaAbsoluta);
+        
+        String rutaRelativa = "/data/librosPrestados.ser";
+        String rutaAbsoluta = context.getRealPath(rutaRelativa);
+        File archivo = new File(rutaAbsoluta);
 
-    try {
-        RandomAccessFile raf = new RandomAccessFile(archivo, "r");
-        try (FileInputStream fis = new FileInputStream(raf.getFD());
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
+        if (archivo.exists() && archivo.isFile()) {
+            try (FileInputStream fis = new FileInputStream(archivo); ObjectInputStream ois = new ObjectInputStream(fis)) {
 
-            lLibros = (Lista) ois.readObject();
-        } catch (EOFException e) {
-            System.out.println("El archivo está vacío");
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo"); 
+                lLibros = (Lista) ois.readObject();
+            } catch (EOFException e) {
+                System.out.println("El archivo está vacío");
+            } catch (IOException e) {
+                System.out.println("Error al leer el archivo"); 
+            }
+        } else {
+            System.out.println("El archivo no existe");
         }
-      } catch (FileNotFoundException e) {
-        System.out.println("El archivo no existe");
-    }
 
-    return lLibros;
+        return lLibros;
 }
          public static String listarLibros (String terminoBusqueda,ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
            //Llenamos la lista con la informacion del archivo
@@ -122,19 +121,26 @@ public static Lista leerPrestamo(ServletContext context) throws IOException, Cla
     }
          
          
-               public static String listarPrestamos (ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
+              public static String listarPrestamos (ServletContext context,HttpServletRequest request) throws IOException, ClassNotFoundException{
            //Llenamos la lista con la informacion del archivo
            Lista listaLibro = leerPrestamo(context);
+                  
            //En caso de estar vacia se crea una
             if (listaLibro == null) {
                  listaLibro = new Lista();
             }
            String tabla="";//Variable que contiene la tabla
 
-          tabla = listaLibro.tablaPrestamo(request);
+          tabla = listaLibro.tablaPrestamo();
+          
+                  System.out.println(tabla);
                
 
-               return tabla;
+               return tabla; 
+    }
+
+    public static void escribirPrestamo(Libro libroPrestamo, ServletContext context) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
        
 
