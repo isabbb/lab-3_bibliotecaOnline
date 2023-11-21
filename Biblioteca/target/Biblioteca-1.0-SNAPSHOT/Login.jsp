@@ -24,7 +24,7 @@
      boolean bandera = librosPrest.verificar();
      
 
-     String prestamoHTML = Serializacion.listarPrestamos(context, request);
+     String prestamoHTML = Serializacion.listarPrestamos(terminoBusqueda, context, request);    
      
 
 %>
@@ -127,7 +127,7 @@
                     <div>
                           <%
                             //Condicional if para saber si existen tareas en el archivo
-                            if (!verificar) {
+                            if (!verificar || (terminoBusqueda == null && !verificar)) {
                         %>
                         <tr>
                             <td colspan='6' align='center' valign='middle'>No se han registrado Libro</td>
@@ -187,7 +187,7 @@
                     <div>
                           <%
                             //Condicional if para saber si existen tareas en el archivo
-                            if (!bandera) {
+                            if (!bandera  || (terminoBusqueda == null && !bandera)) {
                         %>
                         <tr>
                             <td colspan='6' align='center' valign='middle'>No se han registrado Libro</td>
@@ -345,7 +345,7 @@
             </div>
         </div>
         
-        <!-- modal donde se muestran los libros-->
+        <!-- modal donde se muestran los libros disponibles-->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
          <div class="modal-dialog"> 
@@ -357,6 +357,29 @@
                  <div class="modal-body"> 
                   
                      <div id="libro-details"> 
+                         <!-- Aquí se añade los detalles del perro-->
+                </div>
+                 </div> 
+                 <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> 
+                </div>
+             </div> 
+         </div> 
+     </div>
+        
+        
+         <!-- modal donde se muestran los libros prestados-->
+
+    <div class="modal fade" id="ModalPrestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+         <div class="modal-dialog"> 
+             <div class="modal-content"> 
+                 <div class="modal-header"> 
+                    <h5 class="modal-title" id="exampleModalLabel">Detalles del Libro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+                 </div>
+                 <div class="modal-body"> 
+                  
+                     <div id="libroPres-details"> 
                          <!-- Aquí se añade los detalles del perro-->
                 </div>
                  </div> 
@@ -431,6 +454,33 @@
   });
   
 </script>
+<script>
+    // funcion para mostrar los datos en la ventana modal
+  $('#ModalPrestamo').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Botón que desencadenó el evento
+    var titulo= button.data('titulo'); // Obtén el nombre del 
+
+    // Realiza una solicitud AJAX al servlet para obtener los detalles del perro por su nombre
+    $.ajax({
+      url: 'SvAgregarLibro?titulo=' + titulo, // Cambia 'id' por el nombre del parámetro que esperas en tu servlet
+      method: 'GET',
+      success: function (data) {
+        // Actualiza el contenido del modal con los detalles del perro
+        $('#libroPres-details').html(data);
+      },
+      error: function () {
+        // Maneja errores aquí si es necesario y se imprime en consola
+        console.log('Error al cargar los detalles del libro.');
+      }
+    });
+  });
+  
+</script>
+
+
+
+
+
 <script>
     
     var id = "";

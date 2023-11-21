@@ -121,7 +121,7 @@ public static Lista leerPrestamo(ServletContext context) throws IOException, Cla
     }
          
          
-              public static String listarPrestamos (ServletContext context,HttpServletRequest request) throws IOException, ClassNotFoundException{
+              public static String listarPrestamos (String terminoBusqueda, ServletContext context, HttpServletRequest request) throws IOException, ClassNotFoundException{
            //Llenamos la lista con la informacion del archivo
            Lista listaLibro = leerPrestamo(context);
                   
@@ -129,20 +129,18 @@ public static Lista leerPrestamo(ServletContext context) throws IOException, Cla
             if (listaLibro == null) {
                  listaLibro = new Lista();
             }
-           String tabla="";//Variable que contiene la tabla
-
-          tabla = listaLibro.tablaPrestamo();
-          
-                  System.out.println(tabla);
-               
+           String tabla="";//Variable que contiene la tabla}
+           
+                if (terminoBusqueda==null){
+               tabla = listaLibro.tablaPrestamo();
+           }else if (!terminoBusqueda.isEmpty() ){
+               tabla = listaLibro.tablaBusquedaPrestamo(terminoBusqueda, request);
+           }
 
                return tabla; 
     }
 
-    public static void escribirPrestamo(Libro libroPrestamo, ServletContext context) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-       
+    
 
     }
 

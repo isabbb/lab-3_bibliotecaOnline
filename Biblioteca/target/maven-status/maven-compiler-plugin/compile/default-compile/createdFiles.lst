@@ -4,11 +4,13 @@ servlets\SvLogin.class
 com\mycompany\biblioteca\Nodo.class
 com\mycompany\biblioteca\Lista.class
 servlets\SvEliminar.class
+servlets\SvVerPrestamo.class
 servlets\SvPrestamo.class
 com\mycompany\biblioteca\Serializacion.class
 servlets\SvBuscar.class
 com\mycompany\biblioteca\JakartaRestConfiguration.class
 com\mycompany\biblioteca\resources\JakartaEE8Resource.class
 com\mycompany\biblioteca\Usuario.class
+servlets\SvDevolver.class
 servlets\SvUsuario.class
 servlets\SvAgregarLibro.class

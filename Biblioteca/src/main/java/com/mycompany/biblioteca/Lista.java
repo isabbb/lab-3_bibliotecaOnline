@@ -115,7 +115,7 @@
         tablaHTML.append("<td>").append(libro.getPortada()).append("</td>");
 
        tablaHTML.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
-        tablaHTML.append("<form action=\"SvPrestamo\" method=\"GET\" ><input type=\"text\" name=\"tiPres\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-pen-clip\"></i></button></form>");
+        tablaHTML.append("<form action=\"SvPrestamo\" method=\"GET\" ><input type=\"text\" name=\"tiPres\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-cart-shopping\"></i></button></form>");
         tablaHTML.append ("<form action=\"SvEliminar\" method=\"GET\" ><input type=\"text\" name=\"inputEliminar\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-danger\"><i class=\"fa-solid fa-trash\"></i></button></form></  td>");
         }
         actual = actual.siguiente;
@@ -174,7 +174,7 @@ public String tablaPrestamo (){
         tablaPrestamo.append("<td>").append(libro.getAnio()).append("</td>");
         tablaPrestamo.append("<td>").append(libro.getPortada()).append("</td>");
 
-         tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-titulo=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+       tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#ModalPrestamo\" data-tituloP=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
         tablaPrestamo.append ("<form action=\"SvDevolver\" method=\"GET\" ><input type=\"text\" name=\"devolver\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-retweet\"></i></button></form></  td>");
 
         tablaPrestamo.append("</tr>");
@@ -186,7 +186,37 @@ public String tablaPrestamo (){
 
         return tablaPrestamo.toString();//Se manda la tabla creada
     }
-    
+     public String tablaBusquedaPrestamo (String terminoBusqueda, HttpServletRequest request){
+        StringBuilder tablaPrestamo = new StringBuilder();
+        Nodo actual = iNodo;
+
+        while (actual !=null){
+        if (terminoBusqueda.equalsIgnoreCase(actual.libro.getAutor()) || terminoBusqueda.equalsIgnoreCase(actual.libro.getTitulo())){
+
+       
+        Libro libro = actual.libro;
+        tablaPrestamo.append("<tr>");
+        tablaPrestamo.append("<td>").append(libro.getTitulo()).append("</td>");
+        tablaPrestamo.append("<td>").append(libro.getAutor()).append("</td>");
+        tablaPrestamo.append("<td>").append(libro.getAnio()).append("</td>");
+        tablaPrestamo.append("<td>").append(libro.getPortada()).append("</td>");
+
+         tablaPrestamo.append("<td><a href=\"#\" type=\"button\" class=\"btn btn-outline-danger\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-tituloP=\"" + libro.getTitulo() + "\"><i class=\"fa-solid fa-eye\"></i></a>");
+        tablaPrestamo.append ("<form action=\"SvDevolver\" method=\"GET\" ><input type=\"text\" name=\"devolver\" value=\""+libro.getTitulo()+"\"hidden><button type=\"submit\" class=\"btn btn-outline-success\"><i class=\"fa-solid fa-retweet\"></i></button></form></  td>");
+
+        tablaPrestamo.append("</tr>");
+       
+        
+    }
+         actual = actual.siguiente;
+        }
+          tablaPrestamo.append("</table>");  // Cierra la tabla
+          return tablaPrestamo.toString(); //Se devuelve la tabla
+     }
+     
+     
+     
+     
     }
     
     
