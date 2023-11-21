@@ -12,27 +12,37 @@
     import static jdk.jpackage.internal.Arguments.CLIOptions.context;
 
     /**
-    *
+    * Clase que representa una lista de libros.
+    * Esta lista está implementada como una lista doblemente enlazada.
     * @author ***
     */
     public class Lista implements Serializable{
 
     private Nodo iNodo, fNodo;
-
+        
+    /**
+     * Constructor de la clase Lista. Inicializa los nodos de inicio y fin como nulos.
+     */
 
     public Lista (){
     iNodo = null;
     fNodo = null;
     }
-
+        
+    /**
+     * Verifica si la lista contiene elementos.
+     * 
+     * @return true si la lista no está vacía, false si está vacía.
+     */
 
     public boolean verificar (){
     return iNodo !=null;
     }
 
     /**
-     * método para agregar libro 
-     * @param libro 
+     * Método para agregar un libro a la lista.
+     * 
+     * @param libro Libro a agregar a la lista.
      */
    public void agregar(Libro libro) {
     Nodo nuevoNodo = new Nodo(libro, null, null);
@@ -48,7 +58,12 @@
     }
 }
 
-
+/**
+     * Genera una tabla HTML que representa la lista de libros.
+     * 
+     * @return Una cadena de texto que contiene el código HTML de la tabla.
+     */
+        
     public String generarTabla (){
         StringBuilder tablaHTML = new StringBuilder();
         Nodo actual = iNodo; 
@@ -78,7 +93,15 @@
 
         return tablaHTML.toString();//Se manda la tabla creada
     }
-    
+    /**
+     * Busca un libro por título y autor en la lista.
+     * 
+     * @param titulo Título del libro a buscar.
+     * @param request Objeto HttpServletRequest necesario para la búsqueda.
+     * @return El libro encontrado o null si no se encuentra.
+     * @throws IOException           
+     * @throws ClassNotFoundException 
+     */
     public Libro buscarLibro (String titulo,HttpServletRequest request) throws IOException, ClassNotFoundException{
 
         Nodo actual = iNodo;
@@ -93,16 +116,33 @@
              actual = actual.siguiente;
     }
     return null;
-
     }
-    
+        
+     /**
+     * Verifica si un libro existe en la lista.
+     * 
+     * @param terminoBusqueda Término de búsqueda para el libro.
+     * @param request   Objeto HttpServletRequest necesario para la búsqueda.
+     * @return true si el libro existe, false si no existe.
+     * @throws IOException            
+     * @throws ClassNotFoundException 
+     */
+        
     public boolean libroExiste (String terminoBusqueda, HttpServletRequest request) throws IOException, ClassNotFoundException{
      if( buscarLibro(terminoBusqueda, request)!=null){
          return true;
      }   
         return false;
     }
-    
+        
+      /**
+     * Genera una tabla HTML que representa los resultados de búsqueda.
+     * 
+     * @param terminoBusqueda Término de búsqueda para filtrar los resultados.
+     * @param request         Objeto HttpServletRequest necesario para la búsqueda.
+     * @return Una cadena de texto que contiene el código HTML de la tabla de búsqueda.
+     */
+        
     public String tablaBusqueda (String terminoBusqueda, HttpServletRequest request){
         StringBuilder tablaHTML = new StringBuilder();
         Nodo actual = iNodo;
