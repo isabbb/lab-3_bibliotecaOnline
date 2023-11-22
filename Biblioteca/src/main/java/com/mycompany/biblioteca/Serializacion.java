@@ -193,29 +193,11 @@ public static Lista leerPrestamo(ServletContext context) throws IOException, Cla
         return tabla; // Retornamos la tabla que se mostrará en la interfaz web
     }
 
-    // Método para leer el archivo que contiene la información de los préstamos
-    public static Lista leerPrestamo(ServletContext context) throws IOException, ClassNotFoundException {
-        // ... Código para leer el archivo y almacenar la información en una lista llamada "listaLibro" ...
-        return listaLibro;
-    }
 
-    // Clase que representa una lista de préstamos
-    public static class Lista implements Serializable {
 
-        // ... Variables y métodos para la lista de préstamos ...
 
-        // Método para crear una tabla con todos los préstamos almacenados en la lista
-        public String tablaPrestamo() {
-            // ... Código para crear la tabla ...
-            return tabla;
-        }
 
-        // Método para crear una tabla con los préstamos que coincidan con un término de búsqueda
-        public String tablaBusquedaPrestamo(String terminoBusqueda, HttpServletRequest request) {
-            // ... Código para crear la tabla ...
-            return tabla;
-        }
-    }
+        
 }
 
              
