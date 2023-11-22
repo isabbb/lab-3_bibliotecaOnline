@@ -12,9 +12,10 @@
     import static jdk.jpackage.internal.Arguments.CLIOptions.context;
 
     /**
+    * 
     * Clase que representa una lista de libros.
     * Esta lista está implementada como una lista doblemente enlazada.
-    * @author ***
+    * @author C,J,I,S
     */
     public class Lista implements Serializable{
 
