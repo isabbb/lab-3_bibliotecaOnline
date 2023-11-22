@@ -23,7 +23,7 @@ import java.io.RandomAccessFile;
     * Proporciona métodos para escribir y leer información de libros y préstamos en archivos.
     * También incluye funciones para listar libros y préstamos basados en términos de búsqueda.
     * 
-    * @author ***
+    * @author C,J,I,S
     */
     public class Serializacion {
             
