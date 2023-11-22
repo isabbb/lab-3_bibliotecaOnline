@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Clase Nodo para representar un elemento en una lista doblemente enlazada.
  * Cada nodo contiene un libro, una referencia al siguiente nodo y una referencia al nodo anterior.
  * 
- * @author ADMIN
+ * @author C,J,I,S
  */
 public class Nodo implements Serializable {
     public Libro libro;
