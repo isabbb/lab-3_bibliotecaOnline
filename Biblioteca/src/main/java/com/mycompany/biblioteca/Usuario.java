@@ -6,7 +6,7 @@ package com.mycompany.biblioteca;
 
 /**
  *
- * @author Lenovo
+ * @author C,J,I,S
  */
 public class Usuario {
      private String cedula;
