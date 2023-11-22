@@ -51,7 +51,7 @@ public class SvEliminar extends HttpServlet {
       
       String titulo = request.getParameter("inputEliminar");
       
-        System.out.println(titulo);
+    
       
       listaLibros.eliminarLibro(titulo);
       

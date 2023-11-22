@@ -32,7 +32,7 @@ public class SvBuscar extends HttpServlet {
         
                String terminoBusqueda = request.getParameter("tiauto"); //Se obtiene el usuario 
         //Redirigimos con la variable para que cambie la tabla
-        System.out.println(terminoBusqueda);
+       
         response.sendRedirect("Login.jsp?search="+terminoBusqueda);
         
     }

@@ -130,9 +130,20 @@
      */
         
     public boolean libroExiste (String terminoBusqueda, HttpServletRequest request) throws IOException, ClassNotFoundException{
-     if( buscarLibro(terminoBusqueda, request)!=null){
-         return true;
-     }   
+        
+     
+        Nodo actual = iNodo;
+            while (actual !=null ){
+            Libro libro = actual.libro;
+
+            if (libro.getTitulo().equalsIgnoreCase(terminoBusqueda) || libro.getAutor().equalsIgnoreCase(terminoBusqueda)){
+
+                return true;
+
+            }
+             actual = actual.siguiente;
+    }
+  
         return false;
     }
         
