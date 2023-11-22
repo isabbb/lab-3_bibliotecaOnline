@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Lenovo
+ * @author A,S,I,C
  */
 @WebServlet(name = "SvLogin", urlPatterns = {"/SvLogin"})
 public class SvLogin extends HttpServlet {

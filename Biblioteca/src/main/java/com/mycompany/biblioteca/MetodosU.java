@@ -14,7 +14,7 @@ import javax.servlet.ServletContext;
 
 /**
  *
- * @author Lenovo
+ * @author I,C,A,S
  */
 public class MetodosU {
     public static ArrayList<Usuario> darUsuarios = new ArrayList<>();

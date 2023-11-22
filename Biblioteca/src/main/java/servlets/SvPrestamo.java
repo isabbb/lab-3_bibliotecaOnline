@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author A,S,I,C
  */
 @WebServlet(name = "SvPrestamo", urlPatterns = {"/SvPrestamo"})
 public class SvPrestamo extends HttpServlet {

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author A,S,I,C
  */
 @WebServlet(name = "SvDevolver", urlPatterns = {"/SvDevolver"})
 public class SvDevolver extends HttpServlet {

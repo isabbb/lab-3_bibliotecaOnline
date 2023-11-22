@@ -28,7 +28,7 @@ import static jdk.jpackage.internal.Arguments.CLIOptions.context;
 
 /**
  *
- * @author ADMIN
+ * @author C,S,I,A
  */
 @WebServlet(name = "SvAgregarLibro", urlPatterns = {"/SvAgregarLibro"})
 @MultipartConfig //cargar un archivo del cliente al servidor.

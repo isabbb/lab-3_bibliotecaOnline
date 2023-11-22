@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author C,I,S,A
  */
 @WebServlet(name = "SvEliminar", urlPatterns = {"/SvEliminar"})
 public class SvEliminar extends HttpServlet {

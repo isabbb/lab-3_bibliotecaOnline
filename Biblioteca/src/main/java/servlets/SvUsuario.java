@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author David Noguera
+ * @author A,S,I,C
  * Este Servlet manejara el registro de los usuarios en la ventana nodal
  */
 @WebServlet(name = "SvUsuario", urlPatterns = {"/SvUsuario"})
